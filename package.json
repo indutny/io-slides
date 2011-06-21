@@ -9,7 +9,7 @@
 
   "dependencies": {
     "optimist": ">= 0.2.4",
-    "connect": ">= 1.5.1",
+    "express": ">= 2.3.11",
     "socket.io" ">= 0.7.0"
   }
 }
