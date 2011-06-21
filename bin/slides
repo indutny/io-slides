@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+var slides = require('../lib/slides'),
+    argv = require('optimist')
+            .default('port', 8081)
+            .default('host', '0.0.0.0')
+            .default('password', 13589)
+            .argv;
+
+var promise = slides.run(argv.port, argv.host, {
+  password: argv.password
+});
+
+promise.on('listen', function() {
+  console.log('Sever is running on %s:%d', argv.host, argv.port);
+});

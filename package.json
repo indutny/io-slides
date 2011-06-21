@@ -1,0 +1,15 @@
+{
+  "name": "margincon-slides",
+  "description": "Slides for MarginCon 2011",
+  "version": "0.0.1",
+
+  "author": "Fedor Indutny <fedor.indutny@gmail.com>",
+
+  "private": true,
+
+  "dependencies": {
+    "optimist": ">= 0.2.4",
+    "connect": ">= 1.5.1",
+    "socket.io" ">= 0.7.0"
+  }
+}
