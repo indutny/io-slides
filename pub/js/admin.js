@@ -41,6 +41,7 @@
       }
     });
   });
+
   $('section#slides').delegate('article', 'dblclick', function(e) {
     var slide = $(this),
         data = slide.data('slide');
