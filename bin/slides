@@ -1,16 +1,13 @@
 #!/usr/bin/env node
 var slides = require('../lib/slides'),
+    fs = require('fs'),
     argv = require('optimist')
-            .default('port', 8081)
-            .default('host', '0.0.0.0')
-            .default('user', 'admin')
-            .default('password', '13589')
-            .argv;
+            .default('config', './config.json')
+            .argv,
+    config = JSON.parse(fs.readFileSync(argv.config).toString());
 
-var promise = slides.run(argv.port, argv.host, {
-  password: argv.password
-});
+var promise = slides.run(config);
 
 promise.on('listen', function() {
-  console.log('Sever is running on %s:%d', argv.host, argv.port);
+  console.log('Sever is running on %s:%d', config.host, config.port);
 });

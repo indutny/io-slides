@@ -81,7 +81,9 @@
   });
 
 
-  // SlideShow Class
+  /**
+   * SlideShow Class @constructor
+   */
   function SlideShow(container, selector) {
     var slides = this.slides = [];
     this.current = 0;
@@ -103,6 +105,7 @@
     });
 
     this.container = $(container);
+    this.moving = [];
   };
 
   /**
@@ -129,10 +132,25 @@
    * Select current slide
    */
   SlideShow.prototype.select = function(num) {
+    var that = this;
+
+    if (this.moving[0] === true) {
+      this.moving.push(function() {
+        that.select(num);
+      });
+      return;
+    }
+
+    // Push lock
+    this.moving.unshift(true);
     this.removeClasses();
 
     this.current = num;
     var visible = this.visible;
+
+    // Was viewport moved?
+    var moved = visible.prev !== visible.stub &&
+                visible.next !== visible.stub;
 
     visible.farprev = this.getSlide(num - 2);
     visible.prev = this.getSlide(num - 1);
@@ -141,6 +159,19 @@
     visible.farnext = this.getSlide(num + 2);
 
     this.addClasses();
+
+    if (moved) {
+      setTimeout(next, 500);
+    } else {
+      next();
+    }
+
+    function next() {
+      var lock = that.moving.shift(),
+          callback = that.moving.shift();
+
+      if (callback) callback();
+    }
   };
 
   /**
