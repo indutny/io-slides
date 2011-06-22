@@ -28,9 +28,11 @@
 
     if (!confirm('Do you wish to create new slide?')) return;
 
-    var currentNum = window.slides[window.slideShow.current].num,
+    var currentSlide = window.slides[window.slideShow.current],
         nextSlide = window.slides[window.slideShow.current + 1],
-        newNum = nextSlide ? (currentNum + nextSlide.num) / 2 : currentNum + 1;
+        newNum = (nextSlide && currentSlide) ?
+                      (currentSlide.num + nextSlide.num) / 2
+                      : currentSlide ? currentSlide.num + 1 : 1;
 
     apiCall('POST', '/api/slides', {
       slide: {
