@@ -345,7 +345,12 @@ section#slides > article .small {
 
 section#slides > article span.small img {
   max-width: 600px;
-  max-height: 150px;
+  max-height: 250px;
+}
+
+section#slides > article img {
+  min-width: 400px;
+  min-height: 150px;
 }
 
 /** Admin UI */
