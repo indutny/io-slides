@@ -11,6 +11,7 @@
     "optimist": ">= 0.2.4",
     "connect": ">= 1.5.1",
     "socket.io": ">= 0.7.0",
-    "node-uuid": ">= 1.2.0"
+    "node-uuid": ">= 1.2.0",
+    "cradle": ">= 0.5.5"
   }
 }
