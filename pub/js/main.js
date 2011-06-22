@@ -1,40 +1,81 @@
 !function() {
-  var socket = io.connect('/slides');
+  var socket = io.connect('/slides'),
+      container = $('#slides'),
+      converter = new Showdown.converter(),
+      slideShow,
+      slides;
+
+  /**
+   * Rerender slideshow
+   */
+  function rerender() {
+    slideShow && slideShow.hide();
+    container.empty();
+
+    /**
+     * Sort slides
+     */
+    slides.sort(function(a, b) {
+      return a.num > b.num ? 1 :
+             a.num == b.num ? 0 : -1;
+    });
+
+    /**
+     * Render Markdown templates to html
+     * and append articles to container
+     */
+    slides.map(function(slide) {
+      slide.markdown || (slide.markdown = '');
+      slide.markdown = slide.markdown.toString()
+
+      return {
+        html: converter.makeHtml(slide.markdown),
+        markdown: slide.markdown
+      };
+    }).forEach(function(slide) {
+      $('<article />').html(slide.html).appendTo(container);
+    });
+    slideShow && slideShow.rerender();
+  };
 
   socket.on('info', function(info) {
-    slideShow.select(info.currentSlide);
-    slideShow.show();
+    /**
+     * Save slides for future sync
+     */
+    slides = info.slides;
+
+    /**
+     * Init slideshow
+     */
+    slideShow = new SlideShow(container, '#slides > article');
+    rerender();
   });
 
+  /**
+   * Handle `slide` event and change current slide
+   */
   socket.on('slide', function(num) {
     slideShow.select(num);
   });
 
-  // HACKERZ PLZ SKIP THIS
-  function getPassword() {
-    var match = (location.hash || '').match(/password=([^&=]*)/);
+  /**
+   * Handle slide changes
+   */
+  socket.on('new', function(slide) {
+    slides.push(slide);
+    rerender();
+  });
 
-    if (match === null) return;
-    return match[1];
-  };
-  var password = getPassword();
-  // OK, READ BELOW
+  socket.on('update', function(index, slide) {
+    slides[index] = slide;
+    rerender();
+  });
 
-  // Keyboard controls
-  if (password) {
-    $(window).keydown(function(e) {
-      if (e.which === 37) {
-        // left
-        socket.emit('slide', password, -1);
-      } else if (e.which === 39) {
-        // right
-        socket.emit('slide', password, 1);
-      } else {
-        return;
-      }
-      e.preventDefault();
-    });
-  }
+  socket.on('remove', function(index) {
+    slides.splice(index, 1);
+    rerender();
+  });
+
 
   // SlideShow Class
   function SlideShow(container, selector) {
@@ -48,6 +89,7 @@
     visible.current = visible.stub;
     visible.next = visible.farnext = visible.stub;
 
+    this.selector = selector;
     $(selector).each(function() {
       var $this = $(this);
       slides.push($this);
@@ -60,10 +102,23 @@
   };
 
   /**
-   * Show slideshow's container
+   * Rerender slideshow
+   */
+  SlideShow.prototype.rerender = function() {
+    var current = this.current;
+    SlideShow.call(this, this.container, this.selector);
+    this.select(current);
+    this.show();
+  };
+
+  /**
+   * Show/Hide slideshow's container
    */
   SlideShow.prototype.show = function() {
     this.container.show();
+  };
+  SlideShow.prototype.hide = function() {
+    this.container.hide();
   };
 
   /**
@@ -116,8 +171,4 @@
     visible.next.addClass('next');
     visible.farnext.addClass('farnext');
   };
-
-  // Get SlideShow instance
-  var slideShow = new SlideShow('#slides', '#slides > article');
-
 }();
