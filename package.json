@@ -1,6 +1,6 @@
 {
-  "name": "margincon-slides",
-  "description": "Slides for MarginCon 2011",
+  "name": "io-slides",
+  "description": "Realtime slideshow for you conf",
   "version": "0.0.1",
 
   "author": "Fedor Indutny <fedor.indutny@gmail.com>",
