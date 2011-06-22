@@ -25,7 +25,8 @@
      * and append articles to container
      */
     slides.forEach(function(slide) {
-      $('<article />').html(slide.html)
+      var middle = $('<section class="middle" />').html(slide.html);
+      $('<article />').html(middle)
                       .data('slide', slide)
                       .appendTo(container);
     });

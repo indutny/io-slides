@@ -219,7 +219,7 @@ section#slides > article {
   overflow: hidden;
   background: #fff;
 
-  padding: 50px;
+  padding: 25px;
 
   box-sizing: border-box;
 
@@ -291,6 +291,13 @@ section#slides > article.animated {
 }
 
 /** Various Article Styles */
+section#slides > article > section.middle {
+  display: table-cell;
+  vertical-align: middle;
+  height: 650px;
+  width: 850px;
+}
+
 section#slides > article h1 {
   font-size: 58px;
   line-height: 114px;
@@ -304,6 +311,16 @@ section#slides > article h2 {
 section#slides > article h3 {
   font-size: 42px;
   line-height: 98px;
+}
+
+section#slides > article code {
+  display: block;
+  text-align: left;
+}
+
+section#slides > article span.small img {
+  max-width: 600px;
+  max-height: 150px;
 }
 
 /** Admin UI */

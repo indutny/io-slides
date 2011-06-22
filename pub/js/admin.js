@@ -93,6 +93,7 @@
        * Save on Ctrl+Enter
        */
       textarea.focus().keydown(function(e) {
+        e.stopPropagation();
         if (e.ctrlKey && e.which === 13) {
           e.preventDefault();
           textarea.dblclick();
