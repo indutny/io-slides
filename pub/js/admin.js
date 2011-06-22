@@ -58,7 +58,9 @@
           changed = newVal !== data.markdown;
 
       slide.data('admin-edit', false);
-      slide.empty().html(data.html);
+
+      slide.find('textarea.slide-edit').remove();
+      data._content.show();
 
       if (changed) {
         /**
@@ -86,8 +88,8 @@
        */
       var textarea = $('<textarea class="slide-edit" />').val(data.markdown);
       slide.data('admin-edit', true);
-      slide.empty()
-           .append(textarea);
+      data._content = slide.find('>*').hide();
+      slide.append(textarea);
 
       /**
        * Save on Ctrl+Enter

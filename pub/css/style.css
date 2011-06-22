@@ -298,6 +298,20 @@ section#slides > article > section.middle {
   width: 850px;
 }
 
+section#slides > article p {
+  margin: 0;
+}
+
+section#slides > article .full {
+  width: 100%;
+  height: 100%;
+}
+
+section#slides > article .half {
+  width: 100%;
+  height: 45%;
+}
+
 section#slides > article h1 {
   font-size: 58px;
   line-height: 114px;
@@ -318,6 +332,11 @@ section#slides > article code {
   text-align: left;
 }
 
+section#slides > article code.small {
+  font-size: 24px;
+  line-height: 35px;
+}
+
 section#slides > article span.small img {
   max-width: 600px;
   max-height: 150px;
@@ -327,6 +346,9 @@ section#slides > article span.small img {
 section#slides > article > textarea.slide-edit {
   width: 100%;
   height: 100%;
+  font-family: 'Droid Sans Mono';
+  font-size: 20px;
+  line-height: 24px;
 }
 
 

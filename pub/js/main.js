@@ -25,19 +25,28 @@
      * and append articles to container
      */
     slides.forEach(function(slide) {
-      var middle = $('<section class="middle" />').html(slide.html);
-      $('<article />').html(middle)
+      var content = $(slide.html);
+      content.find('code').addClass('prettyprint');
+
+      $('<article />').append(content)
                       .data('slide', slide)
                       .appendTo(container);
     });
     slideShow && slideShow.rerender();
+
+    prettyPrint && prettyPrint();
   };
 
   function renderSlide(slide) {
     slide.markdown || (slide.markdown = '');
     slide.markdown = slide.markdown.toString()
 
-    slide.html = converter.makeHtml(slide.markdown);
+    slide.html = [
+      '<section class="middle">',
+      converter.makeHtml(slide.markdown),
+      '</section>'
+    ].join('');
+
     return slide;
   };
 
@@ -72,6 +81,7 @@
   });
 
   socket.on('update', function(index, slide) {
+    console.log('update', index, slide);
     slides[index] = renderSlide(slide);
     rerender();
   });
