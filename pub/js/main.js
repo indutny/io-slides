@@ -24,30 +24,34 @@
      * Render Markdown templates to html
      * and append articles to container
      */
-    slides.map(function(slide) {
-      slide.markdown || (slide.markdown = '');
-      slide.markdown = slide.markdown.toString()
-
-      return {
-        html: converter.makeHtml(slide.markdown),
-        markdown: slide.markdown
-      };
-    }).forEach(function(slide) {
-      $('<article />').html(slide.html).appendTo(container);
+    slides.forEach(function(slide) {
+      $('<article />').html(slide.html)
+                      .data('slide', slide)
+                      .appendTo(container);
     });
     slideShow && slideShow.rerender();
+  };
+
+  function renderSlide(slide) {
+    slide.markdown || (slide.markdown = '');
+    slide.markdown = slide.markdown.toString()
+
+    slide.html = converter.makeHtml(slide.markdown);
+    return slide;
   };
 
   socket.on('info', function(info) {
     /**
      * Save slides for future sync
      */
-    slides = info.slides;
+    window.slides = slides = info.slides.map(renderSlide);
 
     /**
      * Init slideshow
      */
-    slideShow = new SlideShow(container, '#slides > article');
+    slideShow = window.slideShow = new SlideShow(container,
+                                                 '#slides > article');
+    slideShow.select(info.currentSlide);
     rerender();
   });
 
@@ -62,16 +66,16 @@
    * Handle slide changes
    */
   socket.on('new', function(slide) {
-    slides.push(slide);
+    slides.push(renderSlide(slide));
     rerender();
   });
 
   socket.on('update', function(index, slide) {
-    slides[index] = slide;
+    slides[index] = renderSlide(slide);
     rerender();
   });
 
-  socket.on('remove', function(index) {
+  socket.on('delete', function(index) {
     slides.splice(index, 1);
     rerender();
   });
