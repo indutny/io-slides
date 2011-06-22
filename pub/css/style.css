@@ -332,7 +332,7 @@ section#slides > article code {
   text-align: left;
 }
 
-section#slides > article code.small {
+section#slides > article .small {
   font-size: 24px;
   line-height: 35px;
 }
