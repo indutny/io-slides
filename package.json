@@ -13,5 +13,9 @@
     "socket.io": ">= 0.7.0",
     "node-uuid": ">= 1.2.0",
     "cradle": ">= 0.5.5"
+  },
+
+  "scripts": {
+    "start": "forever start -a -l forever.log -e slides.err -o slides.out --minUptime 0 --spinSleepTime 0 bin/slides config.json"
   }
 }
