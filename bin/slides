@@ -2,7 +2,7 @@
 var slides = require('../lib/slides'),
     fs = require('fs'),
     argv = require('optimist')
-            .default('config', './config.json')
+            .default('config', __dirname + '/../config.json')
             .argv,
     config = JSON.parse(fs.readFileSync(argv.config).toString());
 
