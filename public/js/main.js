@@ -70,7 +70,7 @@
    * Handle `slide` event and change current slide
    */
   socket.on('select', function(num) {
-    slideShow.select(num);
+    slideShow && slideShow.select(num);
   });
 
   /**
