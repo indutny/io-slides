@@ -34,6 +34,10 @@
                       (currentSlide.index + nextSlide.index) / 2
                       : currentSlide ? currentSlide.index + 1 : 1;
 
+    if (window.slideShow.current >= window.slides.length) {
+      newIndex = window.slides.length;
+    }
+
     apiCall('POST', '/' + newIndex, {
       index: newIndex,
       markdown: 'your text here'
