@@ -17,8 +17,8 @@
      * Sort slides
      */
     slides.sort(function(a, b) {
-      return a.index > b.index ? 1 :
-             a.index == b.index ? 0 : -1;
+      return +a.index > +b.index ? 1 :
+             +a.index == +b.index ? 0 : -1;
     });
 
     /**
