@@ -1,5 +1,5 @@
 !function() {
-  if (!/admin/.test(location.hash)) return;
+  var slideShowId = location.href.match(/play\/([^\/]+)/)[1];
 
   /**
    * Keyboard controls
@@ -7,10 +7,10 @@
   $(window).keydown(function(e) {
     if (e.which === 37) {
       // left
-      apiCall('POST', '/api/move', {delta: -1});
+      apiCall('POST', '/select', {delta: -1});
     } else if (e.which === 39) {
       // right
-      apiCall('POST', '/api/move', {delta: 1});
+      apiCall('POST', '/select', {delta: 1});
     } else {
       return;
     }
@@ -30,15 +30,13 @@
 
     var currentSlide = window.slides[window.slideShow.current],
         nextSlide = window.slides[window.slideShow.current + 1],
-        newNum = (nextSlide && currentSlide) ?
-                      (currentSlide.num + nextSlide.num) / 2
-                      : currentSlide ? currentSlide.num + 1 : 1;
+        newIndex = (nextSlide && currentSlide) ?
+                      (currentSlide.index + nextSlide.index) / 2
+                      : currentSlide ? currentSlide.index + 1 : 1;
 
-    apiCall('POST', '/api/slides', {
-      slide: {
-        num: newNum,
-        markdown: 'your text here'
-      }
+    apiCall('POST', '/' + newIndex, {
+      index: newIndex,
+      markdown: 'your text here'
     });
   });
 
@@ -67,11 +65,9 @@
          * Update
          */
         if (newVal && confirm('Do you wish to save changes to that slide?')) {
-          apiCall('PUT', '/api/slides/' + data._id, {
-            slide: {
-              num: data.num,
-              markdown: newVal
-            }
+          apiCall('PUT', '/' + data.index, {
+            num: data.index,
+            markdown: newVal
           });
         }
 
@@ -79,7 +75,7 @@
          * Delete
          */
         if (!newVal && confirm('Do you wish to delete that slide?')) {
-          apiCall('DELETE', '/api/slides/' + data._id, {});
+          apiCall('DELETE', '/' + data.index, {});
         }
       }
     } else {
@@ -111,7 +107,7 @@
     callback || (callback = function() {});
     $.ajax({
       type: type,
-      url: url,
+      url: '/api/slideshow/' + slideShowId + '/slide' + url,
       contentType: 'application/json',
       data: JSON.stringify(data),
       error: function() {

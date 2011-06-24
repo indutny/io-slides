@@ -1,5 +1,6 @@
 !function() {
-  var socket = io.connect('/slides'),
+  var slideShowId = location.href.match(/play\/([^\/]+)/)[1],
+      socket = io.connect('/slideshow/' + slideShowId),
       container = $('#slides'),
       converter = new Showdown.converter(),
       slideShow,
@@ -16,8 +17,8 @@
      * Sort slides
      */
     slides.sort(function(a, b) {
-      return a.num > b.num ? 1 :
-             a.num == b.num ? 0 : -1;
+      return a.index > b.index ? 1 :
+             a.index == b.index ? 0 : -1;
     });
 
     /**
@@ -50,7 +51,7 @@
     return slide;
   };
 
-  socket.on('info', function(info) {
+  $.getJSON('/api/slideshow/' + slideShowId + '/slide', function(info) {
     /**
      * Save slides for future sync
      */
@@ -61,32 +62,50 @@
      */
     slideShow = window.slideShow = new SlideShow(container,
                                                  '#slides > article');
-    slideShow.select(info.currentSlide);
+    slideShow.select(info.current);
     rerender();
   });
 
   /**
    * Handle `slide` event and change current slide
    */
-  socket.on('slide', function(num) {
+  socket.on('select', function(num) {
     slideShow.select(num);
   });
 
   /**
    * Handle slide changes
    */
-  socket.on('new', function(slide) {
+  function findSlide(index) {
+    return slides.reduce(function(match, slide, i) {
+      if (match >= 0) return match;
+      return slide.index == index ? i : match;
+    }, -1);
+  };
+
+  socket.on('create', function(slide) {
     slides.push(renderSlide(slide));
     rerender();
   });
 
-  socket.on('update', function(index, slide) {
-    console.log('update', index, slide);
-    slides[index] = renderSlide(slide);
+  socket.on('update', function(slide) {
+    var index = findSlide(slide.index);
+
+    console.log(slide, index);
+    if (index === -1) {
+      slides.push(renderSlide(slide));
+    } else {
+      slides[index] = renderSlide(slide);
+    }
+
     rerender();
   });
 
   socket.on('delete', function(index) {
+    index = findSlide(slide.index);
+
+    if (index === -1) return;
+
     slides.splice(index, 1);
     rerender();
   });
@@ -144,6 +163,10 @@
    */
   SlideShow.prototype.select = function(num) {
     var that = this;
+
+    // Apply bounds
+    num = Math.max(0, num);
+    num = Math.min(num, this.slides.length - 1);
 
     if (this.moving[0] === true) {
       this.moving.push(function() {
