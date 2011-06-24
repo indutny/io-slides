@@ -165,7 +165,6 @@
 
     // Apply bounds
     num = Math.max(0, num);
-    num = Math.min(num, this.slides.length - 1);
 
     if (this.moving[0] === true) {
       this.moving.push(function() {
