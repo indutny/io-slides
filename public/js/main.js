@@ -91,7 +91,6 @@
   socket.on('update', function(slide) {
     var index = findSlide(slide.index);
 
-    console.log(slide, index);
     if (index === -1) {
       slides.push(renderSlide(slide));
     } else {
