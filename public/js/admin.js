@@ -31,13 +31,13 @@
     var currentSlide = window.slides[window.slideShow.current],
         nextSlide = window.slides[window.slideShow.current + 1],
         newIndex = (nextSlide && currentSlide) ?
-                      (currentSlide.index + nextSlide.index) / 2
-                      : currentSlide ? currentSlide.index + 1 : 1;
+                      (+currentSlide.index + nextSlide.index) / 2
+                      : currentSlide ? +currentSlide.index + 1 : 1;
 
     if (window.slideShow.current >= window.slides.length) {
       var lastSlide = window.slides[window.slides.length - 1];
       if (lastSlide) {
-        newIndex = lastSlide.index + 1;
+        newIndex = +lastSlide.index + 1;
       }
     }
 
