@@ -35,7 +35,7 @@
     });
     slideShow && slideShow.rerender();
 
-    prettyPrint && prettyPrint();
+    window.prettyPrint && prettyPrint();
   };
 
   function renderSlide(slide) {
