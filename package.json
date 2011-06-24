@@ -15,8 +15,7 @@
     "mongoose": ">= 1.4.0",
     "mongoose-auth": ">= 0.0.11",
     "connect-redis": ">= 1.0.6",
-    "redis": ">= 0.6.0",
-    "cluster": ">= 0.6.4"
+    "redis": ">= 0.6.0"
   },
 
   "scripts": {
