@@ -102,7 +102,7 @@
   });
 
   socket.on('delete', function(index) {
-    index = findSlide(slide.index);
+    index = findSlide(index);
 
     if (index === -1) return;
 
