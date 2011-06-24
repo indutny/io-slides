@@ -186,9 +186,20 @@ table { border-collapse: collapse; border-spacing: 0; }
    Primary styles
    Author: Fedor Indutny
    ========================================================================== */
+html, body {
+  background: #333;
+  height: 100%;
+}
+
+section#centered-content {
+  margin: 0 auto;
+  max-width: 700px;
+  min-width: 400px;
+  background: white;
+  min-height: 100%;
+}
 
 section#container {
-  background: #333;
   overflow: hidden;
 }
 

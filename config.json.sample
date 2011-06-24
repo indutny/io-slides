@@ -1,13 +1,20 @@
 {
   "port": 8081,
   "host": "0.0.0.0",
-  "username": "admin",
-  "password": "13589",
+  "secret": "12345",
   "db": {
-    "host": "localhost",
-    "port": 5984,
-    "username": "admin",
-    "password": "admin",
-    "database": "slides"
+    "mongodb": "mongodb://localhost/slides",
+    "redis": {
+    }
+  },
+  "auth": {
+    "twitter": {
+      "everyauth": {
+        "myHostname": "http://local.host:8081",
+        "consumerKey": "abcd",
+        "consumerSecret": "abcd",
+        "redirectPath": "/"
+      }
+    }
   }
 }
