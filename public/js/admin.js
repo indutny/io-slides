@@ -35,7 +35,10 @@
                       : currentSlide ? currentSlide.index + 1 : 1;
 
     if (window.slideShow.current >= window.slides.length) {
-      newIndex = window.slides.length;
+      var lastSlide = window.slides[window.slides.length];
+      if (lastSlide) {
+        newIndex = lastSlide.index + 1;
+      }
     }
 
     apiCall('POST', '/' + newIndex, {
