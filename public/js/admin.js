@@ -35,7 +35,7 @@
                       : currentSlide ? currentSlide.index + 1 : 1;
 
     if (window.slideShow.current >= window.slides.length) {
-      var lastSlide = window.slides[window.slides.length];
+      var lastSlide = window.slides[window.slides.length - 1];
       if (lastSlide) {
         newIndex = lastSlide.index + 1;
       }
