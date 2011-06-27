@@ -1,6 +1,10 @@
+section#title
+  h1
+    span.left Slides.
+    span.right IO
 section#content
   - if (user)
-    h1 Hey #{user.twit.name}
+    h2 Hey #{user.twit.name}
     p That is your slideshows
     ul
       - each slideshow in slideshows
