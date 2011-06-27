@@ -3,6 +3,5 @@ config.json
 forever.log
 slides.out
 slides.err
-public/css/*
-!public/css/prettify.css
+public/css/*.css
 !public/css/.keep
