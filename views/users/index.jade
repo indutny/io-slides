@@ -5,7 +5,7 @@ section#content
     ul
       - each slideshow in slideshows
         li
-          a(href="/play/#{slideshow._id}")= slideshow.title
+          a(href="/play/#{slideshow.slug}")= slideshow.title
 
     h2 Create a Slideshow:
     form(method="post", action="/api/slideshow")

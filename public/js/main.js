@@ -22,7 +22,7 @@
     });
 
     /**
-     * Render Markdown templates to html
+     * Render templates to html
      * and append articles to container
      */
     slides.forEach(function(slide) {
@@ -39,12 +39,13 @@
   };
 
   function renderSlide(slide) {
-    slide.markdown || (slide.markdown = '');
-    slide.markdown = slide.markdown.toString()
+    slide.content || (slide.content = '');
+    slide.content = slide.content.toString()
 
     slide.html = [
       '<section class="middle">',
-      converter.makeHtml(slide.markdown),
+      slide.contentType === 'markdown' &&
+          converter.makeHtml(slide.content),
       '</section>'
     ].join('');
 

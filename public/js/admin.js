@@ -43,7 +43,8 @@
 
     apiCall('POST', '/' + newIndex, {
       index: newIndex,
-      markdown: 'your text here'
+      content: 'your text here',
+      contentType: 'markdown'
     });
   });
 
@@ -60,7 +61,7 @@
        */
 
       var newVal = slide.find('>textarea.slide-edit').val(),
-          changed = newVal !== data.markdown;
+          changed = newVal !== data.content;
 
       slide.data('admin-edit', false);
 
@@ -74,7 +75,8 @@
         if (newVal && confirm('Do you wish to save changes to that slide?')) {
           apiCall('PUT', '/' + data.index, {
             num: data.index,
-            markdown: newVal
+            content: newVal,
+            contentType: data.contentType
           });
         }
 
@@ -89,7 +91,7 @@
       /**
        * Show slides source
        */
-      var textarea = $('<textarea class="slide-edit" />').val(data.markdown);
+      var textarea = $('<textarea class="slide-edit" />').val(data.content);
       slide.data('admin-edit', true);
       data._content = slide.find('>*').hide();
       slide.append(textarea);
