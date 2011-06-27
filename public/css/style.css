@@ -220,6 +220,9 @@ section#title {
 section#title h1 {
   font: 77px/82px 'CopseRegular';
   margin: 0 25px;
+  text-shadow: 0 0 3px rgba(0,0,0,0.84);
+  -webkit-text-shadow: 0 0 3px rgba(0,0,0,0.84);
+  -moz-text-shadow: 0 0 3px rgba(0,0,0,0.84);
 }
 
 section#title h1 span.left {
