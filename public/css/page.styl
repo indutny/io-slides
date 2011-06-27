@@ -1,8 +1,31 @@
-/* =============================================================================
-   Primary styles
-   Author: Fedor Indutny
-   ========================================================================== */
+/**
+ * Primary styles
+ * Author: Fedor Indutny
+ */
 
+// Common fns
+box-shadow()
+  box-shadow arguments
+  -webkit-box-shadow arguments
+  -moz-box-shadow arguments
+text-shadow()
+  text-shadow arguments
+  -webkit-text-shadow arguments
+  -moz-text-shadow
+border-radius()
+  border-radius arguments
+  -webkit-border-radius arguments
+  -moz-border-radius arguments
+transform()
+  transform arguments
+  -webkit-transform arguments
+  -moz-transform arguments
+transition()
+  transition arguments
+  -webkit-transition arguments
+  -moz-transition arguments
+
+// Fonts
 @font-face
   font-family 'CopseRegular'
 
@@ -12,6 +35,7 @@
   font-weight normal
   font-style normal
 
+// Style
 html, body
   background #222
   height 100%
@@ -31,9 +55,7 @@ section#title
   h1
     font 77px/82px 'CopseRegular'
     margin 0 25px
-    text-shadow 0 0 3px rgba(0,0,0,0.84)
-    -webkit-text-shadow 0 0 3px rgba(0,0,0,0.84)
-    -moz-text-shadow 0 0 3px rgba(0,0,0,0.84)
+    text-shadow(0 0 3px rgba(0,0,0,0.84))
 
     span.left
       color #4093ff
@@ -46,13 +68,9 @@ section#content
   min-width 400px
   background white
 
-  box-shadow 0 0 4px rgba(0,0,0,0.8)
-  -webkit-box-shadow 0 0 4px rgba(0,0,0,0.8)
-  -moz-box-shadow 0 0 4px rgba(0,0,0,0.8)
+  box-shadow(0 0 4px rgba(0,0,0,0.8))
 
-  border-radius 3px
-  -webkit-border-radius 3px
-  -moz-border-radius 3px
+  border-radius(3px)
 
   padding 16px 16px 32px 16px
 
@@ -87,21 +105,15 @@ section#slides
 
     box-sizing border-box
 
-    border-radius 25px
-    -webkit-border-radius 25px
-    -moz-border-radius 25px
+    border-radius(25px)
 
-    transform scale(1)
-    -webkit-transform scale(1)
-    -moz-transform scale(1)
+    transform(scale(1))
 
     font-size 35px
     line-height 68px
 
     text-align center
-    text-shadow rgba(0, 0, 0, 0.2) 0 2px 5px
-    -webkit-text-shadow rgba(0, 0, 0, 0.2) 0 2px 5px
-    -moz-text-shadow rgba(0, 0, 0, 0.2) 0 2px 5px
+    text-shadow(rgba(0, 0, 0, 0.2) 0 2px 5px)
 
   > article.farprev,
   > article.prev,
@@ -122,21 +134,15 @@ section#slides
   > article.prev,
   > article.next
     z-index 2
-    transform scale(0.8)
-    -webkit-transform scale(0.8)
-    -moz-transform scale(0.8)
+    transform(scale(0.8))
   > article.farprev,
   > article.farnext
     z-index 1
-    transform scale(0.5)
-    -webkit-transform scale(0.5)
-    -moz-transform scale(0.5)
+    transform(scale(0.5))
   > article.animated
-    transition margin-left 1s, transform 1s
-    -webkit-transition margin-left 1s, -webkit-transform 1s
-    -moz-transition margin-left 1s, -webkit-transform 1s
+    transition(margin-left 1s, transform 1s)
 
-  /** Various Article Styles */
+  // Various Article Styles
   > article
     > section.middle
       display table-cell
@@ -174,7 +180,7 @@ section#slides
     img
       min-width 400px
       min-height 150px
-    /** Admin UI */
+    // Admin UI
     textarea.slide-edit
       width 100%
       height 100%
