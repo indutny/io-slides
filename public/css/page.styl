@@ -20,10 +20,10 @@ transform()
   transform arguments
   -webkit-transform arguments
   -moz-transform arguments
-transition()
-  transition arguments
-  -webkit-transition arguments
-  -moz-transition arguments
+transition2(a, b)
+  transition a, b
+  -webkit-transition a, b
+  -moz-transition a, b
 
 // Fonts
 @font-face
@@ -140,7 +140,7 @@ section#slides
     z-index 1
     transform(scale(0.5))
   > article.animated
-    transition(margin-left 1s, transform 1s)
+    transition2(margin-left 1s, transform 1s)
 
   // Various Article Styles
   > article
