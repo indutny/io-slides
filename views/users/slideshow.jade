@@ -1,10 +1,10 @@
 section#container
   section#slides
 
-script(src="/js/socket.io.min.js")
-script(src="/js/showdown.min.js")
-script(src="/js/prettify.js", onload="prettyPrint();", defer)
-script(src="/js/main.js")
+script(src=cdn("/js/socket.io.min.js"))
+script(src=cdn("/js/showdown.min.js"))
+script(src=cdn("/js/prettify.js"), onload="prettyPrint();", defer)
+script(src=cdn("/js/main.js"))
 
 - if (owner)
-  script(src="/js/admin.js")
+  script(src=cdn("/js/admin.js"))
