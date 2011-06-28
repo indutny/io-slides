@@ -16,7 +16,8 @@
     "mongoose-auth": ">= 0.0.11",
     "connect-redis": ">= 1.0.6",
     "redis": ">= 0.6.0",
-    "stylus": ">= 0.3.14"
+    "stylus": ">= 0.3.14",
+    "connect-cdn": ">= 0.1.0"
   },
 
   "scripts": {
