@@ -5,6 +5,9 @@
    * Keyboard controls
    */
   $(window).keydown(function(e) {
+    // Ignore ctrl+left and etc
+    if (e.ctrlKey || e.altKey || e.shiftKey) return;
+
     if (e.which === 37) {
       // left
       apiCall('POST', '/select', {delta: -1});
