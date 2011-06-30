@@ -1,10 +1,13 @@
 !function() {
   var slideShowId = location.href.match(/play\/([^\/]+)/)[1],
-      socket = io.connect('/slideshow/' + slideShowId),
+      socket = io.connect(),
       container = $('#slides'),
       converter = new Showdown.converter(),
       slideShow,
       slides;
+
+  // Join slideshow
+  socket.emit('join', slideShowId);
 
   /**
    * Rerender slideshow
