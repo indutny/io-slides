@@ -87,11 +87,6 @@
     }, -1);
   };
 
-  socket.on('create', function(slide) {
-    slides.push(renderSlide(slide));
-    rerender();
-  });
-
   socket.on('update', function(slide) {
     var index = findSlide(slide.index);
 
