@@ -18,7 +18,12 @@ section#content
         input(type="hidden", name="redirect", value="true")
       input(type="submit", value="Create!")
 
+    br
+    a.twitter-login(href="/logout") Logout
   - else
     h1 Hey!
+    br
     a.twitter-login(href="/auth/twitter") Login with twitter
+  br
+  br
   small Copyright 2011 Fedor Indutny. All rights reserved
